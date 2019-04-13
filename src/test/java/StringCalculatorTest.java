@@ -19,12 +19,12 @@ public class StringCalculatorTest {
 
     @Test
     public void simplePlus() {
-        assertEquals(7, stringCalculator.add("4+4"));
+        assertEquals(8, stringCalculator.add("4+4"));
     }
 
     @Test
     public void complexPlus() {
-        assertEquals(7, stringCalculator.add("-4+4"));
+        assertEquals(0, stringCalculator.add("-4+4"));
     }
 
     @Test
