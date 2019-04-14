@@ -52,6 +52,23 @@ public class StringCalculatorTest {
         assertEquals(100059, stringCalculator.calculate("-4+60+1+100002"));
     }
 
+
+    @Test
+    public void complexFormula5() {
+        assertEquals(34, stringCalculator.calculate("-(34-2)+2"));
+    }
+
+
+    @Test
+    public void complexFormula6() {
+        assertEquals(-77, stringCalculator.calculate("(4+2)+(11-2)"));
+    }
+
+    @Test
+    public void complexFormula7() {
+        assertEquals(15, stringCalculator.calculate("(12+1)+(11-0)-11+32-(121-1)+0"));
+    }
+
     @Test
     public void formulaNewLine() {
         assertEquals(57, stringCalculator.calculate("-4\n+60+1"));
