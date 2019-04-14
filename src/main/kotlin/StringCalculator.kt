@@ -1,5 +1,5 @@
 class StringCalculator {
-    fun add(rawInput: String): Int {
+    fun calculate(rawInput: String): Int {
         if (rawInput.isEmpty())
             return 0
 

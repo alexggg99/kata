@@ -14,38 +14,80 @@ public class StringCalculatorTest {
 
     @Test
     public void emptyString_returnZero() {
-        assertEquals(0, stringCalculator.add("") );
+        assertEquals(0, stringCalculator.calculate("") );
     }
 
     @Test
     public void simplePlus() {
-        assertEquals(8, stringCalculator.add("4+4"));
+        assertEquals(8, stringCalculator.calculate("4+4"));
     }
 
     @Test
     public void complexPlus() {
-        assertEquals(0, stringCalculator.add("-4+4"));
+        assertEquals(0, stringCalculator.calculate("-4+4"));
     }
 
     @Test
     public void simpleMinus() {
-        assertEquals(1, stringCalculator.add("4-3"));
+        assertEquals(1, stringCalculator.calculate("4-3"));
     }
 
     @Test
     public void testNegativeResult() {
-        assertEquals(1, stringCalculator.add("4-3"));
+        assertEquals(1, stringCalculator.calculate("4-3"));
     }
 
     @Test
     public void complexFormula() {
-        assertEquals(-8, stringCalculator.add("4-3+1-10"));
+        assertEquals(-8, stringCalculator.calculate("4-3+1-10"));
+    }
+
+    @Test
+    public void complexFormula2() {
+        assertEquals(-14, stringCalculator.calculate("4-11+3--10"));
+    }
+
+    @Test
+    public void complexFormula3() {
+        assertEquals(77, stringCalculator.calculate("4-30+1+102"));
+    }
+
+    @Test
+    public void complexFormula4() {
+        assertEquals(10059, stringCalculator.calculate("-4+60+1+100002"));
+    }
+
+    @Test
+    public void illegalSymbols1() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.calculate("4-M-1");
+
+        });
+    }
+
+    @Test
+    public void illegalSymbols2() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.calculate("6+ 6+");
+        });
+    }
+
+    @Test
+    public void illegalSymbols3() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.calculate("3=7");
+        });
+    }
+
+    @Test
+    public void illegalSymbols4() {
+        assertEquals(10, stringCalculator.calculate("3+ 7"));
     }
 
     @Test
     public void lettreStringAndNumber() {
         assertThrows(IllegalArgumentException.class, () -> {
-            stringCalculator.add("f,7");
+            stringCalculator.calculate("f,7");
         });
     }
 
