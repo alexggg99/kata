@@ -58,6 +58,11 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void complexFormula5() {
+        assertEquals(22, stringCalculator.calculate("-44+55--1+10"));
+    }
+
+    @Test
     public void formulaNewLine() {
         assertEquals(57, stringCalculator.calculate("-4\n+60+1"));
     }
@@ -87,6 +92,13 @@ public class StringCalculatorTest {
     @Test
     public void illegalSymbols4() {
         assertEquals(10, stringCalculator.calculate("3+ 7"));
+    }
+
+    @Test
+    public void illegalSymbols5() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            stringCalculator.calculate("3++7");
+        });
     }
 
     @Test

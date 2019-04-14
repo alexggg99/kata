@@ -1,5 +1,6 @@
 class StringCalculator {
-    fun calculate(rawInput: String): Int {
+    fun calculate
+                (rawInput: String): Int {
 
         var signedNumber = ""
         var sum = 0
