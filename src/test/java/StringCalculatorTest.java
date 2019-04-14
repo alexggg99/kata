@@ -70,18 +70,18 @@ public class StringCalculatorTest {
 
     @Test
     public void complexFormula5() {
-        assertEquals(34, stringCalculator.calculate("-(34-2)+2"));
+        assertEquals(-30, stringCalculator.calculate("-(34-2)+2"));
     }
 
 
     @Test
     public void complexFormula6() {
-        assertEquals(-77, stringCalculator.calculate("(4+2)+(11-2)"));
+        assertEquals(15, stringCalculator.calculate("(4+2)+(11-2)"));
     }
 
     @Test
     public void complexFormula7() {
-        assertEquals(15, stringCalculator.calculate("(12+1)+(11-0)-11+32-(121-1)+0"));
+        assertEquals(-75, stringCalculator.calculate("(12+1)+(11-0)-11+32-(121-1)+0"));
     }
 
     @Test
