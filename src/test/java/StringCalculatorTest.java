@@ -23,6 +23,21 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void simplePlus2() {
+        assertEquals(8, stringCalculator.calculate(" 4+4"));
+    }
+
+    @Test
+    public void simplePlus3() {
+        assertEquals(8, stringCalculator.calculate("4+4 "));
+    }
+
+    @Test
+    public void simplePlus4() {
+        assertEquals(8, stringCalculator.calculate(" 4+4 "));
+    }
+
+    @Test
     public void complexPlus() {
         assertEquals(0, stringCalculator.calculate("-4+4"));
     }
