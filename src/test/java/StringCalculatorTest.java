@@ -54,7 +54,7 @@ public class StringCalculatorTest {
 
     @Test
     public void complexFormula4() {
-        assertEquals(10059, stringCalculator.calculate("-4+60+1+100002"));
+        assertEquals(100059, stringCalculator.calculate("-4+60+1+100002"));
     }
 
     @Test
