@@ -43,11 +43,6 @@ public class StringCalculatorTest {
     }
 
     @Test
-    public void complexFormula2() {
-        assertEquals(-14, stringCalculator.calculate("4-11+3--10"));
-    }
-
-    @Test
     public void complexFormula3() {
         assertEquals(77, stringCalculator.calculate("4-30+1+102"));
     }
@@ -55,11 +50,6 @@ public class StringCalculatorTest {
     @Test
     public void complexFormula4() {
         assertEquals(100059, stringCalculator.calculate("-4+60+1+100002"));
-    }
-
-    @Test
-    public void complexFormula5() {
-        assertEquals(22, stringCalculator.calculate("-44+55--1+10"));
     }
 
     @Test

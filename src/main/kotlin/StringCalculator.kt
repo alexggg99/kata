@@ -1,6 +1,5 @@
 class StringCalculator {
-    fun calculate
-                (rawInput: String): Int {
+    fun calculate(rawInput: String): Int {
 
         var signedNumber = ""
         var sum = 0
@@ -22,7 +21,7 @@ class StringCalculator {
 
             if (character == '+' || character == '-') {
                 if (signedNumber == "")
-                    continue
+                    throw IllegalArgumentException("Unexpected operators duplication for %s".format(character))
                 signedNumber = signedNumber.plus(character).reversed()
                 sum += signedNumber.toInt()
                 signedNumber = ""
