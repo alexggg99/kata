@@ -58,6 +58,11 @@ public class StringCalculatorTest {
     }
 
     @Test
+    public void formulaNewLine() {
+        assertEquals(57, stringCalculator.calculate("-4\n+60+1"));
+    }
+
+    @Test
     public void illegalSymbols1() {
         assertThrows(IllegalArgumentException.class, () -> {
             stringCalculator.calculate("4-M-1");
