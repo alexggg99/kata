@@ -19,6 +19,7 @@ class StringCalculator {
                     else {
                         var expression = stack.pop()
                         if(expression !is Operator) throw java.lang.IllegalArgumentException()
+                        if(expression.isDivideByZero(element.toDouble())) throw java.lang.IllegalArgumentException()
                         expression.setExpres2(Number(element.toDouble()))
                         stack.push(expression)
                     }
@@ -36,7 +37,7 @@ class StringCalculator {
     }
 
     private fun throwIfIllegalArgs(expr: String) {
-        var fobiddenSimbols = expr.filter { !it.isDigit() && !it.equals('+') && !it.equals('-') && !it.isWhitespace()}
+        var fobiddenSimbols = expr.filter { !it.isDigit() && !it.equals('+') && !it.equals('-') && !it.isWhitespace() && !it.equals('*') && !it.equals('/')}
         if (fobiddenSimbols.length > 0) throw IllegalArgumentException()
     }
 
@@ -44,6 +45,8 @@ class StringCalculator {
         is Number -> expr.value
         is Plus -> eval(expr.expr1!!) + eval(expr.expr2!!)
         is Minus -> eval(expr.expr1!!) - eval(expr.expr2!!)
+        is Multiply -> eval(expr.expr1!!) * eval(expr.expr2!!)
+        is Divide -> eval(expr.expr1!!) / eval(expr.expr2!!)
     }
 
 }
@@ -63,6 +66,12 @@ sealed class Expression
 data class Number(var value: Double): Expression()
 data class Plus(override var expr1: Expression?, override var expr2: Expression?): Expression(), Operator
 data class Minus(override var expr1: Expression?, override var expr2: Expression?): Expression(), Operator
+data class Multiply(override var expr1: Expression?, override var expr2: Expression?): Expression(), Operator
+data class Divide(override var expr1: Expression?, override var expr2: Expression?): Expression(), Operator
+
+fun Expression.isDivideByZero(value: Double): Boolean {
+    return this is Divide && value == 0.0
+}
 
 fun String.isNum(): Boolean {
     return this.toIntOrNull() != null
@@ -70,13 +79,15 @@ fun String.isNum(): Boolean {
 
 
 fun String.isExpression(): Boolean {
-    return this.equals("+") || this.equals("-")
+    return this.equals("+") || this.equals("-")|| this.equals("/") || this.equals("*")
 }
 
 fun String.toExpression(expt1: Expression?, expr2: Expression?): Expression {
     when {
         this.contains("+") -> return Plus(expt1, expr2)
         this.contains("-") -> return Minus(expt1, expr2)
+        this.contains("*") -> return Multiply(expt1, expr2)
+        this.contains("/") -> return Divide(expt1, expr2)
     }
     return Number(1.0)
 }
