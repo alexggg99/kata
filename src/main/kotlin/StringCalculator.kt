@@ -18,16 +18,37 @@ class StringCalculator {
                         stack.push(Number(element.toDouble()))
                     else {
                         var expression = stack.pop()
-                        if(expression !is Operator) throw java.lang.IllegalArgumentException()
-                        if(expression.isDivideByZero(element.toDouble())) throw java.lang.IllegalArgumentException()
-                        expression.setExpres2(Number(element.toDouble()))
+                        if (expression !is Operator) throw java.lang.IllegalArgumentException()
+                        if (expression.isDivideByZero(element.toDouble())) throw java.lang.IllegalArgumentException()
+                        if (expression.expr2 == null) {
+                            expression.setExpres2(Number(element.toDouble()))
+                        } else {
+                            var emp = expression.expr2
+                            while ((emp as Operator).expr2 != null) {
+                                emp = (emp as Operator).expr2
+                            }
+                            (emp as Operator).setExpres2(Number(element.toDouble()))
+                        }
                         stack.push(expression)
                     }
 
                 }
                 element.isExpression() -> {
                     if(stack.isEmpty()) throw java.lang.IllegalArgumentException()
-                    var expression = element.toExpression(stack.pop(), null)
+                    var expression = element.toExpression(null, null)
+                    var previousExpr = stack.peek()
+                    if (previousExpr is Number) {
+                        (expression as Operator).setExpres1(previousExpr)
+                    } else {
+                        if((previousExpr is Plus || previousExpr is Minus) && (expression is Multiply || expression is Divide)) {
+                            var prev: Operator = previousExpr as Operator
+                            (expression as Operator).setExpres1(prev.expr2 as Expression)
+                            prev.setExpres2(expression)
+                            expression = prev as Expression
+                        } else {
+                            (expression as Operator).setExpres1(previousExpr)
+                        }
+                    }
                     stack.push(expression)
                 }
                 else -> throw java.lang.IllegalArgumentException()

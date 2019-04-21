@@ -101,7 +101,7 @@ public class StringCalculatorTest {
   @Test
   void priorityProperty() {
     assertEquals(128, stringCalculator.calculate("8 + 6 * 20"));
-//    assertEquals(11, stringCalculator.calculate("8 + 60 / 20"));
+//    assertEquals(11, stringCalculator.calculate("8 + 10 + 20 * 10"));
   }
 
   @Test
@@ -124,6 +124,6 @@ public class StringCalculatorTest {
 
   @Test
   void operatorsCombination() {
-    assertEquals(110, stringCalculator.calculate("110 * 8 / 9"));
+    assertEquals(72, stringCalculator.calculate("108 / 3 * 2"));
   }
 }
